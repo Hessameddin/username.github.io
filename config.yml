@@ -1,0 +1,26 @@
+backend:
+  name: github
+  repo: username/username.github.io
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "pages"
+    label: "صفحات"
+    files:
+      - name: "home"
+        label: "صفحه اصلی"
+        file: "index.md"
+        fields:
+          - {label: "عنوان", name: "title", widget: "string"}
+          - {label: "محتوا", name: "body", widget: "markdown"}
+  - name: "blog"
+    label: "مطالب وبلاگ"
+    folder: "_posts"
+    create: true
+    fields:
+      - {label: "عنوان", name: "title", widget: "string"}
+      - {label: "تاریخ", name: "date", widget: "datetime"}
+      - {label: "محتوا", name: "body", widget: "markdown"}
