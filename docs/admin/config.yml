@@ -1,1 +1,86 @@
 
+# تنظیمات Decap CMS برای سایت فارسی - نسخه پوشه docs
+backend:
+  name: github
+  repo: hessameddin/hessameddin.github.io  # ← نام کاربری تو
+  branch: main
+  base_url: "https://hessameddin.github.io"
+
+# پوشه‌های رسانه (توجه: مسیر از ریشه docs شروع می‌شود)
+media_folder: "docs/images/uploads"        # محل ذخیره عکس‌ها در ریپازیتوری
+public_folder: "/images/uploads"          # آدرس دسترسی در سایت
+
+# تنظیمات کلی
+site_url: "https://hessameddin.github.io"
+display_url: "https://hessameddin.github.io"
+logo_url: "/favicon.ico"
+
+# زبان و جهت متن
+locale: "fa"
+i18n:
+  structure: "multiple_folders"
+  default_locale: "fa"
+
+# ادیتور فارسی
+editor:
+  preview: true
+
+# مجموعه‌های محتوا
+collections:
+  # صفحات اصلی (در ریشه docs)
+  - name: "pages"
+    label: "📄 صفحات سایت"
+    label_singular: "صفحه"
+    folder: "docs"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "title"
+    fields:
+      - {label: "عنوان صفحه", name: "title", widget: "string", required: true}
+      - {label: "آدرس صفحه", name: "slug", widget: "string", hint: "مثال: درباره-من", pattern: ["^[a-z0-9-]+$", "فقط حروف کوچک، اعداد و خط تیره"]}
+      - {label: "تاریخ", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false}
+      - label: "محتوا"
+        name: "body"
+        widget: "markdown"
+        required: true
+        hint: "محتوا را با Markdown بنویسید. برای عکس‌ها از دکمه Upload استفاده کنید."
+        buttons: ["bold", "italic", "link", "image", "bulleted-list", "numbered-list", "quote", "code"]
+        editor_components: ["image", "code-block"]
+    
+  # مطالب وبلاگ (در پوشه docs/_posts)
+  - name: "blog"
+    label: "📝 وبلاگ"
+    label_singular: "مطلب وبلاگ"
+    folder: "docs/_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "عنوان مطلب", name: "title", widget: "string", required: true}
+      - {label: "تاریخ انتشار", name: "date", widget: "datetime", format: "YYYY-MM-DD HH:mm", date_format: "YYYY-MM-DD", time_format: "HH:mm"}
+      - {label: "دسته‌بندی", name: "category", widget: "select", options: ["عمومی", "آموزشی", "فنی", "شخصی"], default: "عمومی"}
+      - {label: "توضیح کوتاه", name: "excerpt", widget: "text", required: false}
+      - {label: "تصویر اصلی", name: "featured_image", widget: "image", required: false}
+      - label: "محتوا"
+        name: "body"
+        widget: "markdown"
+        required: true
+        buttons: ["bold", "italic", "link", "image", "code", "quote", "bulleted-list", "numbered-list", "heading-two", "heading-three"]
+        editor_components: ["image", "code-block", "youtube"]
+    
+  # تنظیمات سایت
+  - name: "site_settings"
+    label: "⚙️ تنظیمات"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "general_settings"
+        label: "تنظیمات عمومی"
+        file: "docs/_config.yml"
+        fields:
+          - {label: "عنوان سایت", name: "title", widget: "string", default: "سایت شخصی من"}
+          - {label: "توضیحات سایت", name: "description", widget: "text", default: "سایت شخصی ساخته شده با GitHub Pages"}
+          - {label: "لوگو سایت", name: "logo", widget: "image", required: false}
+          - {label: "فاوآیکون", name: "favicon", widget: "image", required: false}
+          - {label: "رنگ اصلی", name: "primary_color", widget: "color", default: "#667eea"}
+          - {label: "رنگ دوم", name: "secondary_color", widget: "color", default: "#764ba2"}
