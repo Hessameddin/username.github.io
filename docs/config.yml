@@ -1,0 +1,9 @@
+backend:
+  name: github
+  repo: hessameddin/hessameddin.github.io
+  branch: main
+
+media_folder: "docs/images/uploads"    # توجه کن
+public_folder: "/images/uploads"       # توجه کن
+
+# بقیه کدها...
